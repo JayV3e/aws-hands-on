@@ -8,26 +8,29 @@ https://www.reddit.com/r/sysadmin/comments/8inzn5/so_you_want_to_learn_aws_aka_h
 - [x] Create an IAM user for your personal use.
 - [x] Set up MFA for your root user, turn off all root user API keys.
 - [x] Set up Billing Alerts for anything over a few dollars.
-- [ ] Configure the AWS CLI for your user using API credentials.
-- [ ] Checkpoint: You can use the AWS CLI to interrogate information about your AWS account.
+- [x] Configure the AWS CLI for your user using API credentials.
+- [x] Checkpoint: You can use the AWS CLI to interrogate information about your AWS account.
 
 ## Web Hosting Basics
 
-- [ ] Deploy a EC2 VM and host a simple static "Fortune-of-the-Day Coming Soon" web page.
-- [ ] Take a snapshot of your VM, delete the VM, and deploy a new one from the snapshot. Basically disk backup + disk restore.
-- [ ] Checkpoint: You can view a simple HTML page served from your EC2 instance.
+- [x] Deploy a EC2 VM and host a simple static "Fortune-of-the-Day Coming Soon" web page.
+- [x] Take a snapshot of your VM, delete the VM, and deploy a new one from the snapshot. Basically disk backup + disk restore.
+- [x] Checkpoint: You can view a simple HTML page served from your EC2 instance.
+- [x] Automate in terraform
 
 ## Auto Scaling
 
-- [ ] Create an AMI from that VM and put it in an autoscaling group so one VM always exists.
-- [ ] Put a Elastic Load Balancer infront of that VM and load balance between two Availability Zones (one EC2 in each AZ).
-- [ ] Checkpoint: You can view a simple HTML page served from both of your EC2 instances. You can turn one off and your website is still accessible.
+- [x] Create an AMI from that VM and put it in an autoscaling group so one VM always exists.
+- [x] Put a Elastic Load Balancer infront of that VM and load balance between two Availability Zones (one EC2 in each AZ).
+- [x] Checkpoint: You can view a simple HTML page served from both of your EC2 instances. You can turn one off and your website is still accessible.
+- [x] Automate in terraform
 
 ## External Data
 
 - [ ] Create a DynamoDB table and experiment with loading and retrieving data manually, then do the same via a script on your local machine.
 - [ ] Refactor your static page into your Fortune-of-the-Day website (Node, PHP, Python, whatever) which reads/updates a list of fortunes in the AWS DynamoDB table. (Hint: EC2 Instance Role)
 - [ ] Checkpoint: Your HA/AutoScaled website can now load/save data to a database between users and sessions
+- [ ] Automate in terraform
 
 ## Web Hosting Platform-as-a-Service
 
@@ -37,13 +40,14 @@ https://www.reddit.com/r/sysadmin/comments/8inzn5/so_you_want_to_learn_aws_aka_h
 - [ ] Enable SSL for your Static S3 Website. This isn't exactly trivial. (Hint: CloudFront + ACM)
 - [ ] Enable SSL for your Elastic Beanstalk Website.
 - [ ] Checkpoint: Your HA/AutoScaled website now serves all data over HTTPS. The same as before, except you don't have to manage the servers, web server software, website deployment, or the load balancer.
+- [ ] Automate in terraform
 
 ## Microservices
 
 - [ ] Refactor your EB website into ONLY providing an API. It should only have a POST/GET to update/retrieve that specific data from DynamoDB. Bonus: Make it a simple REST API. Get rid of www.yourdomain.com and serve this EB as api.yourdomain.com
 - [ ] Move most of the UI piece of your EB website into your Static S3 Website and use Javascript/whatever to retrieve the data from your api.yourdomain.com URL on page load. Send data to the EB URL to have it update the DynamoDB. Get rid of static.yourdomain.com and change your S3 bucket to serve from www.yourdomain.com.
 - [ ] Checkpoint: Your EB deployment is now only a structured way to retrieve data from your database. All of your UI and application logic is served from the S3 Bucket (via CloudFront). You can support many more users since you're no longer using expensive servers to serve your website's static data.
-
+- [ ] Automate in terraform
 ## Serverless
 
 - [ ] Write a AWS Lambda function to email you a list of all of the Fortunes in the DynamoDB table every night. Implement Least Privilege security for the Lambda Role. (Hint: Lambda using Python 3, Boto3, Amazon SES, scheduled with CloudWatch)
@@ -54,6 +58,7 @@ https://www.reddit.com/r/sysadmin/comments/8inzn5/so_you_want_to_learn_aws_aka_h
 - [ ] Your S3 static content should make Javascript calls to the API Gateway and then update the page with the retrieved data.
 - [ ] Once you have the "Get Fortune" API Gateway + Lambda working, do the "New Fortune" API.
 - [ ] Checkpoint: Your API Gateway and S3 Bucket are fronted by CloudFront with SSL. You have no EC2 instances deployed. All work is done by AWS services and billed as consumed.
+- [ ] Automate in terraform
 
 ## Cost Analysis
 
@@ -65,6 +70,7 @@ https://www.reddit.com/r/sysadmin/comments/8inzn5/so_you_want_to_learn_aws_aka_h
 - [ ] Basic Web Hosting: HA EC2 Instances Serving Static Web Page behind ELB
 - [ ] Microservices: Elastic Beanstalk SSL Website for only API + S3 Static Website for all static content + DynamoDB Table + Route53 + CloudFront SSL
 - [ ] Serverless: Serverless Website using API Gateway + Lambda Functions + DynamoDB + Route53 + CloudFront SSL + S3 Static Website for all static content
+- [ ] Automate in terraform
 
 ## Automation
 
