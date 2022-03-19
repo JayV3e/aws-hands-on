@@ -5,9 +5,9 @@ https://www.reddit.com/r/sysadmin/comments/8inzn5/so_you_want_to_learn_aws_aka_h
 
 ## Account Basics
 
-- [ ] Create an IAM user for your personal use.
-- [ ] Set up MFA for your root user, turn off all root user API keys.
-- [ ] Set up Billing Alerts for anything over a few dollars.
+- [x] Create an IAM user for your personal use.
+- [x] Set up MFA for your root user, turn off all root user API keys.
+- [x] Set up Billing Alerts for anything over a few dollars.
 - [ ] Configure the AWS CLI for your user using API credentials.
 - [ ] Checkpoint: You can use the AWS CLI to interrogate information about your AWS account.
 
