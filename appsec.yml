@@ -1,0 +1,9 @@
+version: 0.0
+os: linux
+files:
+  - source: app/
+    destination: /app/
+hooks:
+  ApplicationStart:
+    - location: /app/install.sh
+      timeout: 3600

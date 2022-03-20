@@ -1,4 +1,4 @@
-.env
+*.env*
 jverdoni.pem
 # Local .terraform directories
 **/.terraform/*
