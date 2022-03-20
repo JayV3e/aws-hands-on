@@ -21,7 +21,7 @@ resource "aws_security_group" "allow_http" {
 
   tags = {
     Name = "allow_tls"
-    app  = "aws-hands-on"
+    app  = var.app_name
   }
 }
 resource "aws_security_group" "allow_ssh" {
@@ -47,6 +47,6 @@ resource "aws_security_group" "allow_ssh" {
 
   tags = {
     Name = "allow_ssh"
-    app  = "aws-hands-on"
+    app  = var.app_name
   }
 }

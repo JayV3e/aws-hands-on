@@ -3,7 +3,7 @@ resource "aws_vpc" "main" {
   instance_tenancy = "default"
 
   tags = {
-    app = "aws-hands-on"
+    app = var.app_name
   }
 }
 
@@ -11,7 +11,7 @@ resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    app = "aws-hands-on"
+    app = var.app_name
   }
 }
 
@@ -22,7 +22,7 @@ resource "aws_subnet" "az-1" {
   map_public_ip_on_launch = "true"
 
   tags = {
-    app = "aws-hands-on"
+    app = var.app_name
   }
 }
 
@@ -34,7 +34,7 @@ resource "aws_subnet" "az-2" {
   map_public_ip_on_launch = "true"
 
   tags = {
-    app = "aws-hands-on"
+    app = var.app_name
   }
 }
 

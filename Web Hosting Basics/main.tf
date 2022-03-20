@@ -4,7 +4,7 @@ resource "aws_instance" "coming-soon" {
   key_name      = "jverdoni"
 
   tags = {
-    app = "aws-hands-on"
+    app = var.app_name
   }
   vpc_security_group_ids = [
     aws_security_group.allow_http.id,
