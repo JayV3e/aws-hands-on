@@ -1,0 +1,72 @@
+---
+- name: Deploy flask app
+  hosts: all
+  remote_user: ec2-user
+  become: true
+  vars:
+    ansible_ssh_private_key_file: "../jverdoni.pem"
+    ansible_ssh_user: "ec2-user"
+    app_name: "flask"
+
+  tasks:
+  - name: Install git and nginx
+    yum:
+      name: "{{item}}"
+      state: present
+    with_items:
+      - git
+      - nginx
+
+  - name: Install pip
+    command: python -m ensurepip --upgrade
+
+  - name: Install venv
+    command: python -m pip install virtualenv
+
+  - name: Git checkout
+    ansible.builtin.git:
+      repo: 'https://github.com/JayV3e/aws-hands-on-flask-app.git'
+      dest: /home/{{ ansible_ssh_user }}/{{ app_name }}
+
+  - name: install modules in a virtualenv
+    pip:
+      requirements: /home/{{ ansible_ssh_user }}/{{ app_name }}/requirements.txt
+      virtualenv: /home/{{ ansible_ssh_user }}/{{ app_name }}/env
+      virtualenv_python: python3
+
+  - name: template systemd service config
+    template:
+      src: .service.j2
+      dest: /etc/systemd/system/{{ app_name }}.service
+
+  - name: Recursively change ownership of a directory
+    ansible.builtin.file:
+      path: /home/ec2-user
+      state: directory
+      recurse: yes
+      owner: ec2-user
+      group: ec2-user
+
+  - name: start systemd app service
+    systemd: 
+      name: "{{ app_name }}.service"
+      state: restarted 
+      enabled: yes
+
+  - name: template nginx site config
+    template:
+      src: .nginx.j2
+      dest: /etc/nginx/nginx.conf
+  
+  - name: enable nginx site
+    file:
+      src: /etc/nginx/sites-available/{{ app_name }}
+      dest: /etc/nginx/sites-enabled/default
+      state: link
+      force: yes
+
+  - name: restart nginx
+    systemd: 
+      name: nginx 
+      state: restarted 
+      enabled: yes
