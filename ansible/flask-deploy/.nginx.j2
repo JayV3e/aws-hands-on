@@ -37,9 +37,16 @@ http {
 
     server {
         listen 80;
+        
         location / {
-        root /home/{{ ansible_ssh_user }}/{{ app_name }}/client/dist/;
+        root /home/{{ ansible_ssh_user }}/{{ app_name }}/;
         index index.html;
-}
-}
+        }
+    }
+    server {
+        listen 5000;
+        location /thankful {
+            proxy_pass http://unix:/home/{{ ansible_ssh_user }}/{{ app_name }}/{{ app_name }}.sock;
+        }
+    }
 }
