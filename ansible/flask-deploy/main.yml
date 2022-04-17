@@ -27,6 +27,7 @@
     ansible.builtin.git:
       repo: 'https://github.com/JayV3e/aws-hands-on-flask-app.git'
       dest: /home/{{ ansible_ssh_user }}/{{ app_name }}
+      force: yes
 
   - name: install modules in a virtualenv
     pip:
@@ -58,13 +59,6 @@
       src: .nginx.j2
       dest: /etc/nginx/nginx.conf
   
-  - name: enable nginx site
-    file:
-      src: /etc/nginx/sites-available/{{ app_name }}
-      dest: /etc/nginx/sites-enabled/default
-      state: link
-      force: yes
-
   - name: restart nginx
     systemd: 
       name: nginx 
